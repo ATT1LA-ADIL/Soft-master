@@ -1,0 +1,112 @@
+﻿<UserControl
+    x:Class="Программное_обеспечение_для_Диспетчеров_Службы_Спасения.WpfForm.View.Fulfilled"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:datacontext="clr-namespace:Программное_обеспечение_для_Диспетчеров_Службы_Спасения.WpfForm.ViewModel"
+    xmlns:local="clr-namespace:Программное_обеспечение_для_Диспетчеров_Службы_Спасения.WpfForm.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance {x:Type datacontext:ViewModel}}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d" Cursor="Hand">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label Content="Выполненные заявки" />
+            <ListView
+                Width="Auto"
+                MaxHeight="200"
+                ItemsSource="{Binding ModelApplication.ApplicationWin}"
+                SelectedItem="{Binding ModelApplication.SelectAplication}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="Auto" Header="Id">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Id}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Name">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Name}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Surname">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Surname}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="MiddleName">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding MiddleName}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Adress">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Adress}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Problem">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Problem}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Status">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Status}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="DateCreate">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding DateCreate}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding DeleteApplication}" Header="Удалить заявку!!!" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>

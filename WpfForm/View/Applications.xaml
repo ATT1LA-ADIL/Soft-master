@@ -1,0 +1,185 @@
+﻿<UserControl
+    x:Class="Программное_обеспечение_для_Диспетчеров_Службы_Спасения.WpfForm.View.Applications"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:datacontext="clr-namespace:Программное_обеспечение_для_Диспетчеров_Службы_Спасения.WpfForm.ViewModel"
+    xmlns:local="clr-namespace:Программное_обеспечение_для_Диспетчеров_Службы_Спасения.WpfForm.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance {x:Type datacontext:ViewModel}}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d" Cursor="Hand">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ValidationFailed">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Red" BorderThickness="3">
+                    <AdornedElementPlaceholder />
+                </Border>
+                <TextBlock
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Text="!" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label Content="Добавление заявки" />
+            <WrapPanel Margin="5,5,5,5">
+                <Label Content="Имя:         " DockPanel.Dock="Left" />
+                <TextBox
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    DockPanel.Dock="Top"
+                    Text="{Binding ModelApplication.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnSourceUpdated=True, ValidatesOnDataErrors=True}"
+                    ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                    Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
+            </WrapPanel>
+            <WrapPanel Margin="5,5,5,5">
+                <Label Content="Фамилия: " />
+                <TextBox
+                    Width="200"
+                    Text="{Binding ModelApplication.Surname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnSourceUpdated=True, ValidatesOnDataErrors=True}"
+                    ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                    Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
+            </WrapPanel>
+            <WrapPanel Margin="5,5,5,5">
+                <Label Content="Отчество: " />
+                <TextBox
+                    Width="200"
+                    Text="{Binding ModelApplication.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnSourceUpdated=True, ValidatesOnDataErrors=True}"
+                    ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                    Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
+            </WrapPanel>
+            <WrapPanel Margin="5,5,5,5">
+                <Label Content="Адрес:       " />
+                <TextBox
+                    Width="200"
+                    Text="{Binding ModelApplication.Adress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnSourceUpdated=True, ValidatesOnDataErrors=True}"
+                    ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                    Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
+            </WrapPanel>
+            <WrapPanel Margin="5,5,5,5">
+                <Label Content="Проблема:" />
+                <TextBox
+                    Width="200"
+                    Text="{Binding ModelApplication.Problem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnSourceUpdated=True, ValidatesOnDataErrors=True}"
+                    ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                    Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
+            </WrapPanel>
+            <Button
+                Width="100"
+                Height="30"
+                Margin="5,5,5,5"
+                HorizontalAlignment="Left"
+                Command="{Binding CreteApplication}"
+                Content="Создать заявку" />
+            <Label Content="{Binding ModelApplication.MessageDb, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel
+            x:Name="ListView"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Label Content="Созданные заявки" />
+            <ListView
+                Width="Auto"
+                MaxHeight="200"
+                ItemsSource="{Binding ModelApplication.ApplicationWork}"
+                SelectedItem="{Binding ModelApplication.SelectAplication}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="Auto" Header="Id">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Id}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Name">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Name}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Surname">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Surname}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="MiddleName">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding MiddleName}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Adress">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Adress}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Problem">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Problem}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Status">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding Status}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="DateCreate">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Width="Auto">
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{Binding DateCreate}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding StatusWin}" Header="Поставить статус выполнено!!!" />
+                        <MenuItem Command="{Binding DeleteApplication}" Header="Удалить заявку!!!" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>
